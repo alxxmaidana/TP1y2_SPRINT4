@@ -1,0 +1,127 @@
+<div class="bg-neutral-900 border flex flex-col justify-between border-neutral-800 rounded-xl p-5 shadow-lg">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-2xl text-blue-400">
+                <%= heroe.nombreSuperheroe %>
+            </h3>
+            <p class="text-sm text-neutral-400">
+                <%= heroe.nombreReal %> · <%= heroe.edad %> años
+            </p>
+        </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="space-y-3 text-sm">
+
+        <div class="flex justify-between border-b border-neutral-800 pb-1">
+            <span class="text-neutral-500 mr-3">Planeta</span>
+            <span>
+                <%= heroe.planetaOrigen %>
+            </span>
+        </div>
+
+        <div class="flex justify-between border-b border-neutral-800 pb-1">
+            <span class="text-neutral-500 mr-3">Debilidad</span>
+            <span>
+                <%= heroe.debilidad %>
+            </span>
+        </div>
+
+        <!-- PODERES -->
+        <div>
+            <p class="text-neutral-500 mb-1">Poderes</p>
+            <div class="flex flex-wrap gap-2">
+                <% heroe.poderes.forEach(poder=> { %>
+                    <span class="tag tag-blue">
+                        <%= poder %>
+                    </span>
+                    <% }) %>
+            </div>
+        </div>
+
+        <!-- ALIADOS -->
+        <div>
+            <p class="text-neutral-500 mb-1">Aliados</p>
+            <div class="flex flex-wrap gap-2">
+                <% heroe.aliados.forEach(aliado=> { %>
+                    <span class="tag tag-green">
+                        <%= aliado %>
+                    </span>
+                    <% }) %>
+            </div>
+        </div>
+
+        <!-- ENEMIGOS -->
+        <div>
+            <p class="text-neutral-500 mb-1">Enemigos</p>
+            <div class="flex flex-wrap gap-2">
+                <% heroe.enemigos.forEach(enemigo=> { %>
+                    <span class="tag tag-red">
+                        <%= enemigo %>
+                    </span>
+                    <% }) %>
+            </div>
+        </div>
+
+        <div class="flex justify-between border-t border-neutral-800 pt-2 mt-2">
+            <span class="text-neutral-500">Creador</span>
+            <span>
+                <%= heroe.creador %>
+            </span>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="flex justify-between mt-5 gap-2">
+        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn-edit w-full text-center">
+            Editar
+        </a>
+        <button onclick="eliminarSuperheroe('<%= heroe.id %>')" type="submit" class="btn-delete w-full">
+            Eliminar
+        </button>
+    </div>
+
+</div>
+
+<style>
+    .tag {
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .tag-blue {
+        background: rgba(37, 99, 235, 0.15);
+        color: #60a5fa;
+    }
+
+    .tag-green {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+    }
+
+    .tag-red {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+    }
+
+    .btn-edit {
+        background: #1d4ed8;
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        font-size: 0.85rem;
+        transition: 0.2s;
+    }
+
+    .btn-delete {
+        background: #991b1b;
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        font-size: 0.85rem;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+</style>

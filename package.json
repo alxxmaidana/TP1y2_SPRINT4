@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.6.1"
+  },
+  "type": "module",
+  "name": "tp1_sprint4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxxmaidana/TP1_SPRINT4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alxxmaidana/TP1_SPRINT4/issues"
+  },
+  "homepage": "https://github.com/alxxmaidana/TP1_SPRINT4#readme"
+}

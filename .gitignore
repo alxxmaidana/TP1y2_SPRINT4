@@ -1,0 +1,5 @@
+node_modules/
+.env
+superheros.json
+package-lock.json
+biome.json
