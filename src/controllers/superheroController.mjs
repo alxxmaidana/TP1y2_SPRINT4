@@ -4,7 +4,7 @@ import SuperheroRepository from "../repositories/SuperheroRepository.mjs";
 import {
 	actualizarSuperheroePorId,
 	agregarNuevoSuperheroe,
-	buscarSuperheoresPorAtributo,
+	buscarSuperheroesPorAtributo,
 	eliminarSuperheroePorId,
 	eliminarSuperheroePorNombre,
 	obtenerSuperheroePorId,
@@ -53,24 +53,18 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 }
 
 // BUSCAR SUPERHÉROE POR ATRIBUTO Y VALOR
-// export async function buscarSuperheoresPorAtributoController(req, res) {
-// 	try {
-// 		const { atributo, valor } = req.params;
-// 		const superheroes = await buscarSuperheoresPorAtributo(atributo, valor);
-// 		if (superheroes.length === 0) {
-// 			return res.status(404).send({
-// 				mesagge: "No se encontraros superhéroes con los valores especificados",
-// 			});
-// 		}
-// 		const superheroesFormateados = renderizarlistaSuperheroes(superheroes);
-// 		res.status(200).json(superheroesFormateados);
-// 	} catch (err) {
-// 		res.status(500).send({
-// 			mesagge: "Error al buscar sueperhéroes por atributo",
-// 			err: err.mesagge,
-// 		});
-// 	}
-// }
+export async function buscarSuperheroesPorAtributoController(req, res) {
+	try {
+		const { ...params } = req.query;
+		const superheroes = await buscarSuperheroesPorAtributo(params);
+		res.status(200).json(superheroes);
+	} catch (err) {
+		res.status(500).send({
+			mesagge: "Error al buscar sueperhéroes por atributo",
+			err: err.mesagge,
+		});
+	}
+}
 
 // OBTENER SUEPERHÉROES MAYORES DE 30
 // export async function obtenerSuperheroesMayoresDe30Controller(_req, res) {
@@ -140,7 +134,7 @@ export async function editarSuperheroeController(req, res) {
 export async function eliminarSuperheroeController(req, res) {
 	try {
 		await eliminarSuperheroePorId(req.params.id);
-		res.status(204).send(); 
+		res.status(204).send();
 	} catch (error) {
 		res.status(500).send({
 			message: "Ocurrió un error al eliminar el Superhéroe",

@@ -1,6 +1,7 @@
 <div class="form-container">
 
     <h2 class="form-title">Editar Superhéroe</h2>
+    <p class="form-hint">Campos obligatorios<span class="req">*</span></p>
 
     <form id="edit-superhero-form" autocomplete="off">
 
@@ -8,9 +9,9 @@
 
         <%- include("./partials/superheroForm.ejs", { superheroe }) %>
 
-            <div class="btn-row">
-                <a href="/api/heroes" class="btn-secondary">Cancelar</a>
-                <button type="submit" class="btn-primary">Guardar cambios</button>
+            <div class="form-btns">
+                <a href="/api/heroes" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
             </div>
 
     </form>

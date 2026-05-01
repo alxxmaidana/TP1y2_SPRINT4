@@ -1,65 +1,51 @@
-<!-- IDENTIDAD -->
-<fieldset>
-    <legend>Identidad</legend>
-    <div class="grid-2">
-        <div class="field">
-            <label>Nombre de superhéroe <span class="req">*</span></label>
-            <input type="text" name="nombreSuperheroe" value="<%= superheroe.nombreSuperheroe %>">
-        </div>
-
-        <div class="field">
-            <label>Nombre real <span class="req">*</span></label>
-            <input type="text" name="nombreReal" value="<%= superheroe.nombreReal %>">
-        </div>
-    </div>
-
-    <div class="grid-2">
-        <div class="field">
-            <label>Edad <span class="req">*</span></label>
-            <input type="number" name="edad" value="<%= superheroe.edad %>">
-        </div>
-
-        <div class="field">
-            <label>Planeta</label>
-            <input type="text" name="planetaOrigen" value="<%= superheroe.planetaOrigen %>">
-        </div>
+<div class="grid-2">
+    <div class="field">
+        <label>Nombre de superhéroe <span class="req">*</span></label>
+        <input type="text" name="nombreSuperheroe" value="<%= superheroe.nombreSuperheroe %>">
     </div>
 
     <div class="field">
-        <label>Creador</label>
-        <input type="text" name="creador" value="<%= superheroe.creador %>">
+        <label>Nombre real <span class="req">*</span></label>
+        <input type="text" name="nombreReal" value="<%= superheroe.nombreReal %>">
     </div>
-</fieldset>
+</div>
 
-<!-- HABILIDADES -->
-<fieldset>
-    <legend>Habilidades</legend>
-
+<div class="grid-2">
     <div class="field">
-        <label>Debilidad</label>
-        <input type="text" name="debilidad" value="<%= superheroe.debilidad %>">
+        <label>Edad <span class="req">*</span></label>
+        <input type="number" name="edad" value="<%= superheroe.edad %>">
     </div>
 
     <div class="field">
-        <label>Poderes <span class="req">*</span></label>
-        <input type="text" name="poderes" value="<%= superheroe.poderes %>">
-        <small>Separar con comas</small>
+        <label>Planeta de origen</label>
+        <input type="text" name="planetaOrigen" value="<%= superheroe.planetaOrigen %>">
     </div>
-</fieldset>
+</div>
 
-<!-- RELACIONES -->
-<fieldset>
-    <legend>Relaciones</legend>
+<div class="field">
+    <label>Creador</label>
+    <input type="text" name="creador" value="<%= superheroe.creador %>">
+</div>
 
-    <div class="field">
-        <label>Aliados</label>
-        <input type="text" name="aliados" value="<%= superheroe.aliados %>">
-        <small>Separar por comas</small>
-    </div>
+<div class="field">
+    <label>Debilidad</label>
+    <input type="text" name="debilidad" value="<%= superheroe.debilidad %>">
+</div>
 
-    <div class="field">
-        <label>Enemigos</label>
-        <input type="text" name="enemigos" value="<%= superheroe.enemigos %>">
-        <small>Separar por comas</small>
-    </div>
-</fieldset>
+<div class="field">
+    <label>Poderes <span class="req">*</span></label>
+    <input type="text" name="poderes" value="<%= superheroe.poderes %>">
+    <small>Separar con comas</small>
+</div>
+
+<div class="field">
+    <label>Aliados</label>
+    <input type="text" name="aliados" value="<%= superheroe.aliados %>">
+    <small>Separar por comas</small>
+</div>
+
+<div class="field">
+    <label>Enemigos</label>
+    <input type="text" name="enemigos" value="<%= superheroe.enemigos %>">
+    <small>Separar por comas</small>
+</div>

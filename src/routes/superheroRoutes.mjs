@@ -3,7 +3,7 @@ import { Router } from "express";
 import {
 	//actualizarSuperheroePorIdController,
 	agregarSuperheroeController,
-	//buscarSuperheoresPorAtributoController,
+	buscarSuperheroesPorAtributoController,
 	//eliminarSuperheroePorIdController,
 	//eliminarSuperheroePorNombreController,
 	obtenerSuperheroePorIdController,
@@ -41,6 +41,11 @@ router.get("/heroes/agregar", (_req, res) => {
 // Busca el superhéroe por su atributo id, y se lo pasamos a la vista (editSuperhero.ejs) para que precargue los datos del superhéroe 
 router.get("/heroes/:id/editar", obtenerSuperheroePorIdController);
 
+router.get("/heroes/buscar", (_req, res) => {
+	res.render("searchSuperhero", { title: "Buscar superhéroe" });
+});
+
+router.get("/heroes/buscarSuperheroes", buscarSuperheroesPorAtributoController);
 
 ////////////////////////////
 // Rutas Backend

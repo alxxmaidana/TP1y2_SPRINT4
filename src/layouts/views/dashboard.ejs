@@ -1,8 +1,8 @@
-<h2 class="form-title" style="text-align: center; margin-bottom: 2rem;">Lista de Superhéroes</h2>
+<h2 class="text-2xl font-bold mb-6 text-center">Lista de Superhéroes</h2>
 
 <div class="cards-grid">
 
-    <% superheroes.forEach(heroe=> { %> <%- include("./partials/superheroCards.ejs", { heroe }) %>
+    <% superheroes.forEach(heroe=> { %> <%- include("./partials/superheroCards", { heroe }) %>
             <% }); %>
 
 

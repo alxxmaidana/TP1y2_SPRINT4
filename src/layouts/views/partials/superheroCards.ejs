@@ -1,9 +1,9 @@
 <div class="card">
 
     <!-- HEADER -->
-    <div class="card-header">
+    <div class="flex items-center justify-between mb-4">
         <div>
-            <h3 class="card-title">
+            <h3 class="text-2xl superhero-name">
                 <%= heroe.nombreSuperheroe %>
             </h3>
             <p class="card-text">
@@ -13,22 +13,26 @@
     </div>
 
     <!-- INFO -->
-    <div>
+    <div class="space-y-3 text-sm">
 
-        <div class="card-date">
-            <span class="text-muted">Planeta:</span>
-            <span><%= heroe.planetaOrigen %></span>
+        <div class="flex justify-between border-b border-neutral-800 pb-1">
+            <span class="text-neutral-500 mr-3">Planeta</span>
+            <span class="card-text">
+                <%= heroe.planetaOrigen %>
+            </span>
         </div>
 
-        <div class="card-date">
-            <span class="text-muted">Debilidad:</span>
-            <span><%= heroe.debilidad %></span>
+        <div class="flex justify-between border-b border-neutral-800 pb-1">
+            <span class="text-neutral-500 mr-3">Debilidad</span>
+            <span class="card-text">
+                <%= heroe.debilidad %>
+            </span>
         </div>
 
         <!-- PODERES -->
-        <div class="card-date">
-            <p class="text-muted">Poderes</p>
-            <div class="tag-container">
+        <div>
+            <p class="text-neutral-500 mb-1">Poderes</p>
+            <div class="flex flex-wrap gap-2">
                 <% heroe.poderes.forEach(poder=> { %>
                     <span class="tag tag-blue">
                         <%= poder %>
@@ -39,8 +43,8 @@
 
         <!-- ALIADOS -->
         <div>
-            <p class="text-muted">Aliados</p>
-            <div class="tag-container">
+            <p class="text-neutral-500 mb-1">Aliados</p>
+            <div class="flex flex-wrap gap-2">
                 <% heroe.aliados.forEach(aliado=> { %>
                     <span class="tag tag-green">
                         <%= aliado %>
@@ -50,9 +54,9 @@
         </div>
 
         <!-- ENEMIGOS -->
-        <div >
-            <p class="text-muted">Enemigos</p>
-            <div class="tag-container">
+        <div>
+            <p class="text-neutral-500 mb-1">Enemigos</p>
+            <div class="flex flex-wrap gap-2">
                 <% heroe.enemigos.forEach(enemigo=> { %>
                     <span class="tag tag-red">
                         <%= enemigo %>
@@ -61,18 +65,20 @@
             </div>
         </div>
 
-        <div>
-            <span class="text-muted">Creador:</span>
-            <span><%= heroe.creador %></span>
+        <div class="flex justify-between border-t border-neutral-800 pt-2 mt-2">
+            <span class="text-neutral-500">Creador</span>
+            <span>
+                <%= heroe.creador %>
+            </span>
         </div>
     </div>
 
     <!-- ACTIONS -->
     <div class="btn-row">
-        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn btn-cards btn-primary">
+        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn btn-primary w-full">
             Editar
         </a>
-        <button onclick="eliminarSuperheroe('<%= heroe.id %>')" type="submit" class="btn btn-cards btn-danger">
+        <button onclick="eliminarSuperheroe('<%= heroe.id %>')" type="submit" class="btn btn-danger w-full">
             Eliminar
         </button>
     </div>
