@@ -1,4 +1,6 @@
-<div class="cards-grid w-[80%] mx-auto">
+<h2 class="form-title" style="text-align: center; margin-bottom: 2rem;">Lista de Superhéroes</h2>
+
+<div class="cards-grid">
 
     <% superheroes.forEach(heroe=> { %> <%- include("./partials/superheroCards.ejs", { heroe }) %>
             <% }); %>
