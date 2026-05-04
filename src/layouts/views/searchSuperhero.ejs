@@ -4,13 +4,13 @@
             <h2 class="form-title">Buscar superhéroes</h2>
             <p class="form-hint">Busque superhéroes por atributo y valor</p>
 
-            <form id="form-search" autocomplete="off">
+            <form id="form-search" action="/api/heroes/buscar" method="GET" autocomplete="off">
                 <div class="form-search">
                     <div class="search-select mt-2">
                         <label for="atribute-select">
                             Seleccione el atributo
                         </label>
-                        <select name="attributeToSearch" id="select-attribute">
+                        <select name="atributo" id="select-attribute">
                             <option hidden value="none" aria-checked="">Seleccionar atributo</option>
                             <option value="nombreSuperheroe">Nombre superhéroe</option>
                             <option value="nombreReal">Nombre real</option>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="search-input">
                         <label for="attribute-value">Ingrese el valor</label>
-                        <input id="attribute-value" type="text">
+                        <input id="attribute-value" name="valor" type="text" value="<%= valor %>">
                     </div>
                     <div>
                         <button id="btn-search" type="submit" class="btn btn-primary">Buscar</button>
@@ -32,87 +32,87 @@
                 </div>
                 <small>Si seleccionó poderes, aliados o enemigos. Separe por comas los valores que desee buscar</small>
             </form>
+
+            <a href="/api/heroes" class="mb-4"> <- Volver al inicio</a>
+
+
+                    <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
+
+                    <div class="search-result mt-8 ">
+
+                        <div id="not-found-message" class="w-full nt-message 
+                            <% if (atributo && valor) { %>
+                                <%  total > 0 ? "hidden" : "flex" %>
+                            <% } %> 
+                                mb-2">
+                            <span>
+                                No se encontraron Superhéroes con los valores especificados
+                            </span>
+                        </div>
+
+                        <% if (atributo && valor) { %>
+                            <% if (total> 0) {%>
+                                <div class="cards-grid">
+                                    <% superheroes.forEach(heroe => { %>
+                                        <%- include("partials/superheroCards", { heroe }) %>
+                                    <% }) %>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
         </div>
 
-        <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
 
-        <div class="search-result mt-8 ">
-            
-            <div id="not-found-message" class="w-full nt-message hidden mb-2">
-                <span>
-                    No se encontraron Superhéroes con los valores especificados
-                </span>
-            </div>
-            <div class="cards-grid">
-                <% // superheroes.forEach(heroe=> { %>
-                    <%- //include("partials /superheroCards", { heroe })%>
-                        <% //}) %>
-            </div>
 
-        </div>
-
-        <script>
+        <!-- <script>
             const form = document.querySelector("#form-search");
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault()
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
 
                 const atributo = document.querySelector("#select-attribute").value;
                 let valor = document.querySelector("#attribute-value").value.trim();
 
-                // Validar si se seleccionó un atributo y se ingresó un valor
-                const errors = []
-
-                if (atributo === "none") errors.push("Elija un atributo");
-                if (!valor) errors.push("Ingrese un valor");
+                const errors = [];
+                if (atributo === "none") {
+                    errors.push("Elija un atributo");
+                }
+                if (!valor) {
+                    errors.push("Ingrese un valor");
+                }
 
                 if (errors.length > 0) {
                     alert("Por favor corregir:\n" + errors.join("\n"));
                     return;
                 }
 
-                // Si selección un campo array y agregó mas de un valor, separar por comas y convetir valor en array
-                if (atributo === "poderes" || atributo === "aliados" || atributo === "enemigos") {
-                    if (valor.includes(",")) {
-                        valor = valor.split(",").map(item => item.trim());
-                    }
-                }
-
                 let url;
-
-                // Preparar URL
-                if (Array.isArray(valor)) {
-                    // instanciar URLSearchParams() -> Utilidad para trabajar con parámetros de consulta
+                // Si el campo seleccionado es poderes, aliados o emeigos; y el valor contiene comas -> Gererar una cadena de consulta (query sitring) con múltiples parámetros para la url (?poder=poder1&poder=poder2&poder=podern)
+                if (["poderes", "aliados", "enemigos"].includes(atributo) && valor.includes(",")) {
                     const params = new URLSearchParams();
-                    // Si valor es array -> Crear URL con parámetro de consulta múltiple -> ?atributo=a&atributo=b&atributo=n
+                    valor = valor.split(","); // Convertir valor a array separando por comas
                     valor.forEach(v => params.append(atributo, v.trim()));
-                    url = `/api/heroes/buscarSuperheroes?${params.toString(valor)}`;
-                    console.log(url);
+                    url = `/api/heroes/buscarSuperheroes?${params.toString()}`;
                 } else {
-                    // Si valor no es array -> Crear URL con parámetro de consulta normal -> ?atributo=valor
-                    url = `/api/heroes/buscarSuperheroes?${atributo}=${decodeURIComponent(valor)}`
-                    console.log(url);
+                    // Si no, generamos una query string simple (?planetaOrigen=Tierra)
+                    url = `/api/heroes/buscarSuperheroes?${atributo}=${encodeURIComponent(valor)}`;
                 }
 
-                try {
-                    const response = await fetch(url);
-                    
-                    if (response.ok) {
-                        const superheroes = await response.json()
-                        if (superheroes.length === 0) {
-                            const responseMessage = document.querySelector("#not-found-message");
-                            responseMessage.classList.remove("hidden");
-                            responseMessage.classList.add("flex");
-                        } else {
-                            
-                        }
-                    } else {
-                        const err = await response.json();
-                        alert("Error al buscar superhéroes", err);
-                    }
-                } catch {
-                    alert("Ups. Ocurrió un error inesperado");
+                form.action = url;
 
-                }
+                // try {
+                //     const response = await fetch(url);
 
+                //     if (response.ok) {
+                //         const superheroes = await response.json();
+                //         console.log(superheroes);
+                //         window.location.reload()
+                //     } else {
+                //         const error = await response.json()
+                //         console.error(error);
+                //     }
+                // } catch (error) {
+                //     console.error("Errory al enviar la petición", error);
+                // }
+                form.submit();
             });
-        </script>
+        </script>  -->

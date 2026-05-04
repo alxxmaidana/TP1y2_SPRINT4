@@ -83,4 +83,24 @@
         </button>
     </div>
 
+    <script>
+    async function eliminarSuperheroe(id) {
+        const confirmar = confirm("¿Está suguro de eliminar este superhéroe? Esta acción no se puede deshacer.");
+
+        if (confirmar) {
+            try {
+                const response = await fetch(`/api/heroes/${id}`, { method: "DELETE" })
+
+                if (response.ok) {
+                    window.location.reload();
+                }
+            } catch {
+                const error = await response.json();
+                alert("Ocurrió un error inesperado.");
+                console.error("Error al eliminar el superhéroe", error.message);
+            }
+        }
+    }
+</script>
 </div>
+

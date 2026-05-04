@@ -1,3 +1,4 @@
+import { param, query } from "express-validator";
 import Superhero from "../models/superhero.mjs";
 import SuperheroRepository from "../repositories/SuperheroRepository.mjs";
 
@@ -55,9 +56,29 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 // BUSCAR SUPERHÉROE POR ATRIBUTO Y VALOR
 export async function buscarSuperheroesPorAtributoController(req, res) {
 	try {
-		const { ...params } = req.query;
-		const superheroes = await buscarSuperheroesPorAtributo(params);
-		res.status(200).json(superheroes);
+		// const atributo = (req.query.atributo || "");
+		// const valor = (req.query.valor || "");
+		const atributo = (req.query.atributo || "");
+		const valor = (req.query.valor || "");
+		console.log(atributo, valor)
+
+		//const superheroes = q ? await buscarSuperheroesPorAtributo(params) : [];
+		// let superheroes = []
+		// if (atributo && valor) {
+		// 	superheroes = await buscarSuperheroesPorAtributo(atributo, valor)
+		// }
+		const superheroes = atributo && valor ? await buscarSuperheroesPorAtributo(atributo, valor) : [];
+		console.log(superheroes)
+		res.render("searchSuperhero", {
+			title: "Buscar superhéroes",
+			atributo: (req.query.atributo || ""),
+			valor: (req.query.valor || ""),
+			superheroes,
+			total: superheroes.length
+		});
+
+		// const superheroes = await buscarSuperheroesPorAtributo(params);
+		// res.render("resultSearch", { superheroes, title: "Resultado de la búsqueda" });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al buscar sueperhéroes por atributo",

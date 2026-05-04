@@ -14,18 +14,9 @@ class SuperheroRepository extends IRepository {
 	}
 
 	// BUSCAR POR ATRIBUTO Y VALOR
-	async buscarPorAtributo(params) {
-		const query = {};
-		for (const [atributo, valor] of Object.entries(params)) {
-			if (Array.isArray(valor)) {
-				// Si es array -> busca docuemtos que contengan todos los valores
-				query[atributo] = { $all: valor };
-			} else  {
-				// Si no es array -> busqueda normal
-				query[atributo] = valor;
-			}
-		}
-		return await Superhero.find(query);
+	async buscarPorAtributo(atributo, valor) {
+		const valoresDeBusqueda = valor.split(",").map(v => v.trim());
+		return await Superhero.find({[atributo]: { $in: valoresDeBusqueda }});
 	}
 
 	// OBTENER MAYORES DE 30

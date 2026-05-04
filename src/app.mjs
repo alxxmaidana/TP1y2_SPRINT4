@@ -27,6 +27,8 @@ app.set("layout", "layout"); // Definir archivo base para los layout
 app.use(express.static(path.resolve("./layouts/public")));
 
 
+app.use(express.urlencoded({ extended: true }));
+
 // Asignar prefijo /api a todas las rutas
 app.use("/api", routes);
 

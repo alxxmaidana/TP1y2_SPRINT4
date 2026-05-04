@@ -9,8 +9,8 @@ export async function obtenerTodosLosSuperheroes() {
 	return await SuperheroRepository.obtenerTodos();
 }
 // BUSCAR SUPERHÉROES POR ATRIBUTO Y VALOR
-export async function buscarSuperheroesPorAtributo(params) {
-	return await SuperheroRepository.buscarPorAtributo(params);
+export async function buscarSuperheroesPorAtributo(atributo, valor) {
+	return await SuperheroRepository.buscarPorAtributo(atributo, valor);
 }
 // OBTENER SUPERHÉROES POR ID
 export async function obtenerSuperheroesMayoresDe30() {

@@ -17,6 +17,7 @@ import {
 
 import { handleValidationErrors } from "../validations/errorMiddleware.mjs";
 import { superheroValidations } from "../validations/validationRules.mjs";
+import Superhero from "../models/superhero.mjs";
 
 const router = Router();
 
@@ -41,11 +42,16 @@ router.get("/heroes/agregar", (_req, res) => {
 // Busca el superhéroe por su atributo id, y se lo pasamos a la vista (editSuperhero.ejs) para que precargue los datos del superhéroe 
 router.get("/heroes/:id/editar", obtenerSuperheroePorIdController);
 
-router.get("/heroes/buscar", (_req, res) => {
-	res.render("searchSuperhero", { title: "Buscar superhéroe" });
-});
+// Renderizar formulario para buscar por atributo y valor
+router.get("/heroes/buscar", buscarSuperheroesPorAtributoController);
 
-router.get("/heroes/buscarSuperheroes", buscarSuperheroesPorAtributoController);
+// Endpoint para realizar la búsqueda
+// router.get("/heroes/buscarSuperheroes", buscarSuperheroesPorAtributoController);
+
+// Ruta para mostrar resultados de la búsqueda
+router.get("/heroes/buscar/resultado", (_req, res) => {
+	res.render("resultSearch", );
+})
 
 ////////////////////////////
 // Rutas Backend
