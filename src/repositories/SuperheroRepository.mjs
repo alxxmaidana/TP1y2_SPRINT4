@@ -14,21 +14,13 @@ class SuperheroRepository extends IRepository {
 	}
 
 	// BUSCAR POR ATRIBUTO Y VALOR
-	async buscarPorAtributo(atributo, valor) {
-		const valoresDeBusqueda = valor.split(",").map(v => v.trim());
-		return await Superhero.find({[atributo]: { $in: valoresDeBusqueda }});
+	async buscarPorAtributo(query) {
+		return await Superhero.find(query);
 	}
 
 	// OBTENER MAYORES DE 30
-	async obtenerMayoresDe30() {
-		return await Superhero.find({
-			$and: [
-				{ edad: { $gt: 30 } },
-				{ planetaOrigen: "Tierra" },
-				{ $expr: { $gte: [{ $size: "$poderes" }, 2] } },
-				// 			└── operador de agregación ──┘
-			],
-		});
+	async obtenerMayoresDe30(query) {
+		return await Superhero.find(query);
 	}
 
 	// AGREGAR SUPERHÉROE

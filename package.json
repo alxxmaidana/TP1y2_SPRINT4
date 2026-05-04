@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/alxxmaidana/TP1_SPRINT4/issues"
   },
-  "homepage": "https://github.com/alxxmaidana/TP1_SPRINT4#readme"
+  "homepage": "https://github.com/alxxmaidana/TP1_SPRINT4#readme",
+  "devDependencies": {
+    "@biomejs/biome": "2.4.14"
+  }
 }

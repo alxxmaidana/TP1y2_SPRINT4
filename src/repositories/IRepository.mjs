@@ -5,7 +5,7 @@ class IRepository {
 	obtenerTodos() {
 		throw new Error("Método 'obtenerTodos()' no implementado");
 	}
-	buscarPorAtributo(_atributo, _valor) {
+	buscarPorAtributo(_query) {
 		throw new Error("Método 'buscarPorAtributo()' no implementado");
 	}
 	obtenerMayores30() {
@@ -14,7 +14,7 @@ class IRepository {
 	agregarSuperheroe(_superheroe) {
 		throw new Error("Método 'agregarSueperheroes()' no implementado");
 	}
-	actualizarSuperheroe(_id, _operacion) {
+	actualizarSuperheroe(_id, _datosActualizados) {
 		throw new Error("Método 'actualizarSuperheroe()' no implementado");
 	}
 	eliminarPorId(_id) {

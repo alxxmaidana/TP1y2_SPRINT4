@@ -1,79 +1,84 @@
-<a href="/api/heroes" class="mb-4"> <- Volver al inicio</a>
+<div class="form-container">
+    <div class="btn-home"><a href="/api/"> <- Volver al inicio</a></div>
 
-        <div class="form-container">
-            <h2 class="form-title">Buscar superhéroes</h2>
-            <p class="form-hint">Busque superhéroes por atributo y valor</p>
-
-            <form id="form-search" action="/api/heroes/buscar" method="GET" autocomplete="off">
-                <div class="form-search">
-                    <div class="search-select mt-2">
-                        <label for="atribute-select">
-                            Seleccione el atributo
-                        </label>
-                        <select name="atributo" id="select-attribute">
-                            <option hidden value="none" aria-checked="">Seleccionar atributo</option>
-                            <option value="nombreSuperheroe">Nombre superhéroe</option>
-                            <option value="nombreReal">Nombre real</option>
-                            <option value="edad">Edad</option>
-                            <option value="planetaOrigen">Planeta de origen</option>
-                            <option value="debilidad">Debilidad</option>
-                            <option value="poderes">Poderes</option>
-                            <option value="aliados">Aliados</option>
-                            <option value="enemigos">Enemigos</option>
-                        </select>
-                    </div>
-                    <div class="search-input">
-                        <label for="attribute-value">Ingrese el valor</label>
-                        <input id="attribute-value" name="valor" type="text" value="<%= valor %>">
-                    </div>
-                    <div>
-                        <button id="btn-search" type="submit" class="btn btn-primary">Buscar</button>
-                    </div>
-                </div>
-                <small>Si seleccionó poderes, aliados o enemigos. Separe por comas los valores que desee buscar</small>
-            </form>
-
-            <a href="/api/heroes" class="mb-4"> <- Volver al inicio</a>
-
-
-                    <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
-
-                    <div class="search-result mt-8 ">
-
-                        <div id="not-found-message" class="w-full nt-message 
-                            <% if (atributo && valor) { %>
-                                <%  total > 0 ? "hidden" : "flex" %>
-                            <% } %> 
-                                mb-2">
-                            <span>
-                                No se encontraron Superhéroes con los valores especificados
-                            </span>
-                        </div>
-
-                        <% if (atributo && valor) { %>
-                            <% if (total> 0) {%>
-                                <div class="cards-grid">
-                                    <% superheroes.forEach(heroe => { %>
-                                        <%- include("partials/superheroCards", { heroe }) %>
-                                    <% }) %>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
+    <form id="form-search" action="/api/heroes/buscar" method="GET" autocomplete="off" class="form w-full">
+        <h2 class="form-title">Buscar superhéroes</h2>
+        <p class="form-hint">Busque superhéroes por atributo y valor</p>
+        <div class="form-search">
+            <div class="search-select mt-2">
+                <label for="atribute-select">
+                    Seleccione el atributo
+                </label>
+                <input type="hidden" name="atributeValue" value="<%= atributo %>">
+                <select name="atributo" id="select-attribute">
+                    <option hidden disabled value="">Seleccionar atributo</option>
+                    <option value="nombreSuperheroe">Nombre superhéroe</option>
+                    <option value="nombreReal">Nombre real</option>
+                    <option value="edad">Edad</option>
+                    <option value="planetaOrigen">Planeta de origen</option>
+                    <option value="debilidad">Debilidad</option>
+                    <option value="poderes">Poderes</option>
+                    <option value="aliados">Aliados</option>
+                    <option value="enemigos">Enemigos</option>
+                </select>
+            </div>
+            <div class="search-input">
+                <label for="attribute-value">Ingrese el valor</label>
+                <input id="attribute-value" name="valor" type="text" value="<%= valor %>">
+            </div>
+            <div>
+                <button id="btn-search" type="submit" class="btn btn-primary">Buscar</button>
+            </div>
         </div>
+        <small>Si seleccionó poderes, aliados o enemigos. Separe por comas para buscar por dos o más valores</small>
+    </form>
+
+
+</div>
+
+<!-- Resultado de la búsqueda -->
+<% if (atributo !=="" && valor !=="" ) { %>
+    <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
+
+    <div class="search-result mt-8 mb-6">
+
+        <div id="not-found-message" class="w-full nt-message <%= total === 0 ? " flex" : "hidden" %> mb-2">
+            <span>
+                No se encontraron Superhéroes con los valores especificados
+            </span>
+        </div>
+        <% if (total> 0) { %>
+            <div class="cards-grid">
+                <% superheroes.forEach(heroe=> { %>
+                    <%- include("partials/superheroCards", { heroe }) %>
+                        <% }) %>
+            </div>
+            <% } %>
+    </div>
+
+    <% } %>
 
 
 
-        <!-- <script>
-            const form = document.querySelector("#form-search");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
 
+        <script>
+            function seleccionarOptionSelect(valorAtributo) {
+                const elementoSelect = document.querySelector('select[name="atributo"]');
+                for (let i = 0; i < elementoSelect.options.length; i++) {
+                    const opcion = elementoSelect.options[i];
+                    if (opcion.value === valorAtributo) {
+                        opcion.selected = true;
+                        i = elementoSelect.options.length;
+                    }
+                }
+            }
+
+            function validarCampos() {
                 const atributo = document.querySelector("#select-attribute").value;
                 let valor = document.querySelector("#attribute-value").value.trim();
 
                 const errors = [];
-                if (atributo === "none") {
+                if (atributo === "") {
                     errors.push("Elija un atributo");
                 }
                 if (!valor) {
@@ -84,35 +89,17 @@
                     alert("Por favor corregir:\n" + errors.join("\n"));
                     return;
                 }
+            }
 
-                let url;
-                // Si el campo seleccionado es poderes, aliados o emeigos; y el valor contiene comas -> Gererar una cadena de consulta (query sitring) con múltiples parámetros para la url (?poder=poder1&poder=poder2&poder=podern)
-                if (["poderes", "aliados", "enemigos"].includes(atributo) && valor.includes(",")) {
-                    const params = new URLSearchParams();
-                    valor = valor.split(","); // Convertir valor a array separando por comas
-                    valor.forEach(v => params.append(atributo, v.trim()));
-                    url = `/api/heroes/buscarSuperheroes?${params.toString()}`;
-                } else {
-                    // Si no, generamos una query string simple (?planetaOrigen=Tierra)
-                    url = `/api/heroes/buscarSuperheroes?${atributo}=${encodeURIComponent(valor)}`;
-                }
+            document.addEventListener("DOMContentLoaded", () => {
+                const valorAtributo = document.querySelector('input[name="atributeValue"]').value.trim();
+                seleccionarOptionSelect(valorAtributo);
 
-                form.action = url;
-
-                // try {
-                //     const response = await fetch(url);
-
-                //     if (response.ok) {
-                //         const superheroes = await response.json();
-                //         console.log(superheroes);
-                //         window.location.reload()
-                //     } else {
-                //         const error = await response.json()
-                //         console.error(error);
-                //     }
-                // } catch (error) {
-                //     console.error("Errory al enviar la petición", error);
-                // }
-                form.submit();
+                const form = document.querySelector("#form-search");
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    validarCampos();
+                    form.submit();
+                });
             });
-        </script>  -->
+        </script>

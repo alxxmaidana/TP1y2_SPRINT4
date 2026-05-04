@@ -1,9 +1,12 @@
 <div class="form-container">
+    <div class="btn-home"><a href="/api/"> <- Volver al inicio</a></div>
 
-    <h2 class="form-title">Agregar nuevo Superhéroe</h2>
-    <p class="form-hint">Campos obligatorios <span class="req">*</span></p>
 
-    <form id="add-superhero-form" autocomplete="off">
+    <form id="add-superhero-form" autocomplete="off" class="form">
+
+
+        <h2 class="form-title">Agregar nuevo Superhéroe</h2>
+        <p class="form-hint">Campos obligatorios <span class="req">*</span></p>
 
         <%- include("partials/superheroForm.ejs", { superheroe: { nombreSuperheroe: '' , nombreReal: '' , edad: '' ,
             planetaOrigen: '' , creador: '' , debilidad: '' , poderes: '' , aliados: '' , enemigos: '' }}) %>
@@ -88,8 +91,8 @@
                     planetaOrigen: planetaOrigen ? planetaOrigen : "Desconocido",
                     debilidad: debilidad ? debilidad : "No especificada",
                     poderes,
-                    aliados,
-                    enemigos,
+                    aliados : aliados ? aliados : "Sin aliados",
+                    enemigos: enemigos ? enemigos : "Sin enemigos",
                     creador: creador ? creador : "Desconocido"
                 };
 

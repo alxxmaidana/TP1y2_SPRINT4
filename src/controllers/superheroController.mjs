@@ -1,4 +1,3 @@
-import { param, query } from "express-validator";
 import Superhero from "../models/superhero.mjs";
 import SuperheroRepository from "../repositories/SuperheroRepository.mjs";
 
@@ -7,15 +6,15 @@ import {
 	agregarNuevoSuperheroe,
 	buscarSuperheroesPorAtributo,
 	eliminarSuperheroePorId,
-	eliminarSuperheroePorNombre,
+	//eliminarSuperheroePorNombre,
 	obtenerSuperheroePorId,
-	obtenerSuperheroesMayoresDe30,
+	//obtenerSuperheroesMayoresDe30,
 	obtenerTodosLosSuperheroes,
 } from "../services/superheroService.mjs";
 
 // import {
 // 	renderizarlistaSuperheroes,
-// 	renderizarSuperheroe,
+// 	renderizarSuperheroe
 // } from "../layouts/views/responseView.mjs";
 
 // OBTENER SUPERHÉROE POR ID
@@ -56,29 +55,18 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 // BUSCAR SUPERHÉROE POR ATRIBUTO Y VALOR
 export async function buscarSuperheroesPorAtributoController(req, res) {
 	try {
-		// const atributo = (req.query.atributo || "");
-		// const valor = (req.query.valor || "");
-		const atributo = (req.query.atributo || "");
-		const valor = (req.query.valor || "");
-		console.log(atributo, valor)
+		const atributo = req.query.atributo || "";
+		const valor = req.query.valor || "";
 
-		//const superheroes = q ? await buscarSuperheroesPorAtributo(params) : [];
-		// let superheroes = []
-		// if (atributo && valor) {
-		// 	superheroes = await buscarSuperheroesPorAtributo(atributo, valor)
-		// }
-		const superheroes = atributo && valor ? await buscarSuperheroesPorAtributo(atributo, valor) : [];
-		console.log(superheroes)
+		const superheroes = atributo !== "" && valor !== "" ? await buscarSuperheroesPorAtributo(atributo, valor) : [];
+
 		res.render("searchSuperhero", {
 			title: "Buscar superhéroes",
-			atributo: (req.query.atributo || ""),
-			valor: (req.query.valor || ""),
+			atributo,
+			valor,
 			superheroes,
 			total: superheroes.length
 		});
-
-		// const superheroes = await buscarSuperheroesPorAtributo(params);
-		// res.render("resultSearch", { superheroes, title: "Resultado de la búsqueda" });
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al buscar sueperhéroes por atributo",
@@ -87,42 +75,8 @@ export async function buscarSuperheroesPorAtributoController(req, res) {
 	}
 }
 
-// OBTENER SUEPERHÉROES MAYORES DE 30
-// export async function obtenerSuperheroesMayoresDe30Controller(_req, res) {
-// 	try {
-// 		const superheroes = await obtenerSuperheroesMayoresDe30();
-// 		if (superheroes.length === 0) {
-// 			return res.status(404).send({
-// 				mesagge: "No se encontraron superhéroes mayores a 30 años",
-// 			});
-// 		}
-// 		const superheroesFormateados = renderizarlistaSuperheroes(superheroes);
-// 		res.status(200).json(superheroesFormateados);
-// 	} catch (err) {
-// 		res.status(500).send({
-// 			mesagge: "Error al buscar superhéros mayores a 30 años",
-// 			err: err.mesagge,
-// 		});
-// 	}
-// }
 
-// AGREGAR NUEVO SUPERHÉROE
-// export async function agregarNuevoSuperheroeController(req, res) {
-// 	try {
-// 		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
-// 		const nuevoSuperheroe = new Superhero(req.body);
-// 		await agregarNuevoSuperheroe(nuevoSuperheroe);
-// 		// const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
-// 		// res.status(200).json(nuevoSuperheroeFormateado);
-// 	} catch (err) {
-// 		res.status(500).send({
-// 			mesagge: "Error al agregar el nuevo superheroe",
-// 			err: err.mesagge,
-// 		});
-// 	}
-// }
-
-// AGREGAR NUEVO SUPERHÉROE
+// AGREGAR UN NUEVO SUPERHÉROE 
 export async function agregarSuperheroeController(req, res) {
 	try {
 		const nuevoSuperheroe = new Superhero(req.body);
@@ -137,7 +91,7 @@ export async function agregarSuperheroeController(req, res) {
 }
 
 
-// ACTUALIZAR SUPERHÉROE POR ID
+// EDITAR SUPERHÉROE POR ID
 export async function editarSuperheroeController(req, res) {
 	try {
 		const { id } = req.params;
@@ -164,7 +118,42 @@ export async function eliminarSuperheroeController(req, res) {
 	}
 }
 
-// ALIMINAR SUPERHÉROE POR NOMBRE
+// OBTENER SUEPERHÉROES MAYORES DE 30
+// export async function obtenerSuperheroesMayoresDe30Controller(_req, res) {
+// 	try {
+// 		const superheroes = await obtenerSuperheroesMayoresDe30();
+// 		if (superheroes.length === 0) {
+// 			return res.status(404).send({
+// 				mesagge: "No se encontraron superhéroes mayores a 30 años",
+// 			});
+// 		}
+// 		const superheroesFormateados = renderizarlistaSuperheroes(superheroes);
+// 		res.status(200).json(superheroesFormateados);
+// 	} catch (err) {
+// 		res.status(500).send({
+// 			mesagge: "Error al buscar superhéros mayores a 30 años",
+// 			err: err.mesagge,
+// 		});
+// 	}
+// }
+
+// // AGREGAR NUEVO SUPERHÉROE
+// export async function agregarNuevoSuperheroeController(req, res) {
+// 	try {
+// 		// Crear nuevo superhéroe a partir de los datos enviados en el body (Enviamos un JSON desde postman)
+// 		const nuevoSuperheroe = new Superhero(req.body);
+// 		await agregarNuevoSuperheroe(nuevoSuperheroe);
+// 		const nuevoSuperheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
+// 		res.status(200).json(nuevoSuperheroeFormateado);
+// 	} catch (err) {
+// 		res.status(500).send({
+// 			mesagge: "Error al agregar el nuevo superheroe",
+// 			err: err.mesagge,
+// 		});
+// 	}
+// }
+
+// // ALIMINAR SUPERHÉROE POR NOMBRE
 // export async function eliminarSuperheroePorNombreController(req, res) {
 // 	try {
 // 		const { nombreSuperheroe } = req.params;
@@ -184,7 +173,7 @@ export async function eliminarSuperheroeController(req, res) {
 // 	}
 // }
 
-// ELIMINAR SUPERHÉROE POR ID
+// // ELIMINAR SUPERHÉROE POR ID
 // export async function eliminarSuperheroePorIdController(req, res) {
 // 	try {
 // 		const { id } = req.params;

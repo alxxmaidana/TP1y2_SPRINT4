@@ -254,7 +254,25 @@ h3 {
     FORM
 **********/
 
+.btn-home {
+    width: 750px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+} 
+
+.btn-home a:hover {
+    color: var(--main-clr);
+    transition: color 0.2s ease;
+}
+
 .form-container {
+    width: 100%;
+}
+
+.form {
     max-width: 750px;
     margin: 0 auto;
     background-color: var(--bg-secondary);
@@ -343,6 +361,7 @@ small {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
+    width: 100%;
 }
 
 .search-select,
