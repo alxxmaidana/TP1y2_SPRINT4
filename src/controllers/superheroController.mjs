@@ -81,7 +81,7 @@ export async function agregarSuperheroeController(req, res) {
 	try {
 		const nuevoSuperheroe = new Superhero(req.body);
 		await agregarNuevoSuperheroe(nuevoSuperheroe)
-		res.status(200).json({ redirectTo: "/api/heroes" });
+		res.status(204).send();
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al agregar el nuevo superheroe",
@@ -96,7 +96,7 @@ export async function editarSuperheroeController(req, res) {
 	try {
 		const { id } = req.params;
 		await actualizarSuperheroePorId(id, req.body);
-		res.status(200).json({ redirectTo: "/api/heroes" });
+		res.status(204).send();
 	} catch (err) {
 		res.status(500).send({
 			mesagge: "Error al actualizar el superhéroe",

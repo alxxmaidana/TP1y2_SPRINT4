@@ -1,6 +1,8 @@
 <div class="form-container">
-    <div class="btn-home"><a href="/api/"> <- Volver al inicio</a></div>
-
+    <div class="btn-home">
+        <a href="/api/"> <- Volver al inicio</a>
+    </div>
+    <!-- Formulario -->
     <form id="form-search" action="/api/heroes/buscar" method="GET" autocomplete="off" class="form w-full">
         <h2 class="form-title">Buscar superhéroes</h2>
         <p class="form-hint">Busque superhéroes por atributo y valor</p>
@@ -9,7 +11,9 @@
                 <label for="atribute-select">
                     Seleccione el atributo
                 </label>
+                <!-- Input oculto para poder acceder al valor del atributo -->
                 <input type="hidden" name="atributeValue" value="<%= atributo %>">
+                <!-- Seleccionar atributo -->
                 <select name="atributo" id="select-attribute">
                     <option hidden disabled value="">Seleccionar atributo</option>
                     <option value="nombreSuperheroe">Nombre superhéroe</option>
@@ -20,86 +24,84 @@
                     <option value="poderes">Poderes</option>
                     <option value="aliados">Aliados</option>
                     <option value="enemigos">Enemigos</option>
+                    <option value="creador">Creador</option>
                 </select>
             </div>
+            <!-- Ingresar valor/valores -->
             <div class="search-input">
                 <label for="attribute-value">Ingrese el valor</label>
                 <input id="attribute-value" name="valor" type="text" value="<%= valor %>">
             </div>
+            <!-- Botón buscar -->
             <div>
                 <button id="btn-search" type="submit" class="btn btn-primary">Buscar</button>
             </div>
         </div>
         <small>Si seleccionó poderes, aliados o enemigos. Separe por comas para buscar por dos o más valores</small>
     </form>
-
-
 </div>
 
 <!-- Resultado de la búsqueda -->
-<% if (atributo !=="" && valor !=="" ) { %>
+<% if (atributo !== "" && valor !== "") { %>
     <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
-
     <div class="search-result mt-8 mb-6">
-
+        <!-- Si no se encontraron superhéroes mostrar mensaje -->
         <div id="not-found-message" class="w-full nt-message <%= total === 0 ? " flex" : "hidden" %> mb-2">
             <span>
                 No se encontraron Superhéroes con los valores especificados
             </span>
         </div>
-        <% if (total> 0) { %>
+        <!-- Mostrar cards de Superhéreos encontrados -->
+        <% if (total > 0) { %>
             <div class="cards-grid">
                 <% superheroes.forEach(heroe=> { %>
                     <%- include("partials/superheroCards", { heroe }) %>
-                        <% }) %>
+                <% }); %>
             </div>
-            <% } %>
+        <% } %>
     </div>
+<% } %>
 
-    <% } %>
-
-
-
-
-        <script>
-            function seleccionarOptionSelect(valorAtributo) {
-                const elementoSelect = document.querySelector('select[name="atributo"]');
-                for (let i = 0; i < elementoSelect.options.length; i++) {
-                    const opcion = elementoSelect.options[i];
-                    if (opcion.value === valorAtributo) {
-                        opcion.selected = true;
-                        i = elementoSelect.options.length;
-                    }
-                }
+<script>
+    function seleccionarOptionSelect(valorAtributo) {
+        const elementoSelect = document.querySelector('select[name="atributo"]');
+        for (let i = 0; i < elementoSelect.options.length; i++) {
+            const opcion = elementoSelect.options[i];
+            if (opcion.value === valorAtributo) {
+                opcion.selected = true;
+                i = elementoSelect.options.length;
             }
+        }
+    }
 
-            function validarCampos() {
-                const atributo = document.querySelector("#select-attribute").value;
-                let valor = document.querySelector("#attribute-value").value.trim();
+    function validarCampos() {
+        const atributo = document.querySelector("#select-attribute").value;
+        let valor = document.querySelector("#attribute-value").value.trim();
 
-                const errors = [];
-                if (atributo === "") {
-                    errors.push("Elija un atributo");
-                }
-                if (!valor) {
-                    errors.push("Ingrese un valor");
-                }
+        const errors = [];
+        if (atributo === "") {
+            errors.push("Elija un atributo");
+        }
+        if (!valor) {
+            errors.push("Ingrese un valor");
+        }
+        if (errors.length > 0) {
+            alert("Por favor corregir:\n" + errors.join("\n"));
+            return false;
+        } else {
+            return true
+        }
+    }
 
-                if (errors.length > 0) {
-                    alert("Por favor corregir:\n" + errors.join("\n"));
-                    return;
-                }
-            }
+    document.addEventListener("DOMContentLoaded", () => {
+        const valorAtributo = document.querySelector('input[name="atributeValue"]').value.trim();
+        seleccionarOptionSelect(valorAtributo);
 
-            document.addEventListener("DOMContentLoaded", () => {
-                const valorAtributo = document.querySelector('input[name="atributeValue"]').value.trim();
-                seleccionarOptionSelect(valorAtributo);
-
-                const form = document.querySelector("#form-search");
-                form.addEventListener("submit", (e) => {
-                    e.preventDefault();
-                    validarCampos();
-                    form.submit();
-                });
-            });
-        </script>
+        const form = document.querySelector("#form-search");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (!validarCampos()) return;
+            form.submit();
+        });
+    });
+</script>

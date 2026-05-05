@@ -40,7 +40,6 @@ export async function obtenerSuperheroesMayoresDe30() {
 export async function agregarNuevoSuperheroe(superheroe) {
 	return await SuperheroRepository.agregarSuperheroe(superheroe);
 }
-
 // ELIMINAR UN SUPERHÉROE POR ID
 export async function eliminarSuperheroePorId(id) {
 	return await SuperheroRepository.eliminarPorId(id);
