@@ -69,7 +69,7 @@
     </div>
     <!-- Botones -->
     <div class="btn-row">
-        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn btn-primary w-full">
+        <a href="/heroes/<%= heroe._id %>/editar" class="btn btn-primary w-full">
             Editar
         </a>
         <button onclick="eliminarSuperheroe('<%= heroe.id %>')" type="submit" class="btn btn-danger w-full">
@@ -84,7 +84,7 @@
 
         if (confirmar) {
             try {
-                const response = await fetch(`/api/heroes/${id}`, { method: "DELETE" });
+                const response = await fetch(`/heroes/${id}`, { method: "DELETE" });
                 if (response.ok) {
                     window.location.reload();
                 } else {

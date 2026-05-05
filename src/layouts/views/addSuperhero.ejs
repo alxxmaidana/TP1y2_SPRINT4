@@ -1,7 +1,7 @@
 <div class="form-container">
     <!-- Botón inicio -->
     <div class="btn-home">
-        <a href="/api/"> <- Volver al inicio</a>
+        <a href="/"> <- Volver al inicio</a>
     </div>
     <!-- Formulario -->
     <form id="add-superhero-form" autocomplete="off" class="form">
@@ -15,7 +15,7 @@
         }) %>
         <!-- Botones -->
         <div class="form-btns">
-            <a href="/api/heroes" class="btn btn-secondary">Cancelar</a>
+            <a href="/heroes" class="btn btn-secondary">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </form>
@@ -100,7 +100,7 @@
             };
 
             try {
-                const response = await fetch("/api/heroes/agregar", {
+                const response = await fetch("/heroes/agregar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(superheroData)

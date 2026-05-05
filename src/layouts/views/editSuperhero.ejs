@@ -1,5 +1,5 @@
 <div class="form-container">
-    <div class="btn-home"><a href="/api/" > <- Volver al inicio</a></div>
+    <div class="btn-home"><a href="/" > <- Volver al inicio</a></div>
     <!-- Formulario editar superhéroe -->
     <form id="edit-superhero-form" autocomplete="off" class="form">
         <h2 class="form-title">Editar Superhéroe</h2>
@@ -10,7 +10,7 @@
         <%- include("partials/superheroForm", { superheroe }) %>
             <!-- Botones -->
             <div class="form-btns">
-                <a href="/api/heroes" class="btn btn-secondary">Cancelar</a>
+                <a href="/heroes" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
             </div>
     </form>
@@ -102,7 +102,7 @@
 
             try {
                 // Enviar una solicitud PUT al backend para actualizar el superhéroe
-                const response = await fetch(`/api/heroes/${id}/editar`, {
+                const response = await fetch(`/heroes/${id}/editar`, {
                      method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(superheroUpdate)
