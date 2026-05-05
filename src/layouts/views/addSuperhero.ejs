@@ -107,7 +107,7 @@
                 });
 
                 if (response.ok) {
-                    window.location.href = "/api/heroes"; // Redirecciona al inicio
+                    window.location.href = "/heroes"; // Redirecciona al dashboard
                 } else {
                     const error = await response.json()
                     alert("Error al agregar el superhéroe", error.message);

@@ -109,7 +109,7 @@
                 });
 
                 if (response.ok) {
-                    window.location.href = "/api/heroes"; // Redirecciona al Inicio
+                    window.location.href = "/heroes"; // Redirecciona al Dashboard
                 } else {
                     const error = await response.json()
                     alert("Error al editar el superhéroe", error.message);

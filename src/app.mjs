@@ -30,7 +30,7 @@ app.use(express.static(path.resolve("./layouts/public")));
 app.use(express.urlencoded({ extended: true }));
 
 // Asignar prefijo /api a todas las rutas
-app.use("/api", routes);
+app.use("/", routes);
 
 // Manejo de errores para rutas no encontradas
 app.use((_req, res) => {
