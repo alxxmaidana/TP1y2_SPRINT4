@@ -2,17 +2,17 @@
     <div class="btn-home">
         <a href="/"> <- Volver al inicio</a>
     </div>
-    <!-- Formulario -->
+    <!-- Input oculto para poder acceder al valor del atributo -->
+    <input type="hidden" name="atributeValue" value="<%= atributo %>">
     <form id="form-search" action="/heroes/buscar" method="GET" autocomplete="off" class="form w-full">
         <h2 class="form-title">Buscar superhéroes</h2>
         <p class="form-hint">Busque superhéroes por atributo y valor</p>
+        <!-- Formulario -->
         <div class="form-search">
             <div class="search-select mt-2">
                 <label for="atribute-select">
                     Seleccione el atributo
                 </label>
-                <!-- Input oculto para poder acceder al valor del atributo -->
-                <input type="hidden" name="atributeValue" value="<%= atributo %>">
                 <!-- Seleccionar atributo -->
                 <select name="atributo" id="select-attribute">
                     <option hidden disabled value="">Seleccionar atributo</option>
@@ -42,11 +42,11 @@
 </div>
 
 <!-- Resultado de la búsqueda -->
-<% if (atributo !== "" && valor !== "") { %>
+<% if (atributo && valor) { %>
     <h3 class="text-xl text-center my-6 mb-4">Resultado de la búsqueda</h3>
     <div class="search-result mt-8 mb-6">
         <!-- Si no se encontraron superhéroes mostrar mensaje -->
-        <div id="not-found-message" class="w-full nt-message <%= total === 0 ? " flex" : "hidden" %> mb-2">
+        <div id="not-found-message" class="w-full nt-message <%= total === 0 ? "flex" : "hidden" %> mb-2">
             <span>
                 No se encontraron Superhéroes con los valores especificados
             </span>

@@ -4,9 +4,7 @@
     <form id="edit-superhero-form" autocomplete="off" class="form">
         <h2 class="form-title">Editar Superhéroe</h2>
         <p class="form-hint">Campos obligatorios<span class="req">*</span></p>
-
-        <!-- Input oculto para poder accceder al campo id del superhéroe -->
-        <input type="hidden" name="superheroId" value="<%= superheroe.id %>">
+        <!-- Formulario partial -->
         <%- include("partials/superheroForm", { superheroe }) %>
             <!-- Botones -->
             <div class="form-btns">
@@ -14,6 +12,8 @@
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
             </div>
     </form>
+    <!-- Input oculto para poder accceder al campo id del superhéroe -->
+    <input type="hidden" name="superheroId" value="<%= superheroe.id %>">
 </div>
 
 <script>
