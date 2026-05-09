@@ -1,0 +1,146 @@
+@media (max-width: 1366px) {
+    .navbar-container {
+        max-width: 80%;
+    }
+
+    .navbar-menu a {
+        font-size: .875rem;
+    }
+
+    .main-content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar-logo img {
+        width: 35px;
+    }
+
+    .navbar-logo span {
+        font-size: 1.25rem;
+    }
+
+    .navbar-container {
+        max-width: 90%;
+    }
+
+    .main-content {
+        width: 85%;
+    }
+
+    .footer-copy {
+        font-size: small;
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 845px) {
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 420px));
+    }
+}
+
+@media (max-width: 810px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    .navbar-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .5rem;
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-menu a {
+        display: block;
+        padding: 0.65rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        width: 95%;
+        padding: 1.25rem 1rem;
+    }
+
+    .navbar-container {
+        max-width: 95%;
+    }
+
+    .card-text,
+    .card .text-neutral-500 {
+        text-align: left;
+    }
+
+    .btn-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-row .btn {
+        width: 100%;
+    }
+
+    .form-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-search button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar-logo {
+        justify-content: center;
+    }
+
+    .navbar-logo span {
+        font-size: 1.1rem;
+    }
+
+    .form {
+        padding: 1rem;
+    }
+
+    .form-btns {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .btn {
+        margin-top: 1rem;
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 1rem 0.75rem;
+    }
+
+    .main-content {
+        margin: 1rem auto;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+    }
+
+    .footer {
+        font-size: 0.95rem;
+    }
+}

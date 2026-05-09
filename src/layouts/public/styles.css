@@ -11,11 +11,26 @@
     --border: #2a2f3a;
 }
 
-body.app {
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+.app {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.main-content {
+    flex: 1;
 }
 
 h1,
@@ -31,8 +46,6 @@ h3 {
 .navbar {
     background: var(--bg-secondary);
     border-bottom: 2px solid var(--main-clr);
-    position: fixed;
-    top: 0;
     width: 100%;
 }
 
@@ -109,9 +122,8 @@ h3 {
     MAIN
 **********/
 .main-content {
-    max-width: 60%;
-    margin: 6rem auto;
-    padding: 2rem 1rem;
+    width: 60%;
+    margin: 1.5rem auto;
 }
 
 .subtitle {
@@ -150,9 +162,12 @@ h3 {
     background-color: var(--bg-secondary);
     border-top: 1px solid var(--border);
     color: var(--text-muted);
-    position: fixed;
-    bottom: 0;
     width: 100%;
+}
+
+.footer-copy {
+    font-size: medium;
+    font-weight: 500;
 }
 
 /* ******************
@@ -161,7 +176,9 @@ h3 {
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
 }
 
 .card {
@@ -255,13 +272,14 @@ h3 {
 **********/
 
 .btn-home {
-    width: 750px;
+    width: 100%;
+    max-width: 750px;
     margin: 0 auto;
     text-align: left;
     display: flex;
     justify-content: flex-start;
     margin-bottom: 1.5rem;
-} 
+}
 
 .btn-home a:hover {
     color: var(--main-clr);
@@ -296,8 +314,8 @@ h3 {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+    flex-wrap: wrap;
 }
-
 
 .grid-2 {
     display: grid;
